@@ -1,0 +1,50 @@
+/*
+INNER JOIN, FULL/LEFT/RIGHT OUTER JOINS
+*/
+
+SELECT * FROM EmployeeDemographics AS A
+INNER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID --HERE WE ARE ONLY LOOKING AT THIGNS WHICH ARE SIMILAR BETWEEN BOTH THE TABLES BASED ON EMPLOYiD
+
+SELECT * FROM EmployeeDemographics AS A
+FULL OUTER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+
+SELECT * FROM EmployeeDemographics AS A
+LEFT JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID --it says we want everything from the left table and everything that is overlapping. 
+--If an empID is only in right table we do not want it
+
+SELECT * FROM EmployeeDemographics AS A
+RIGHT JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+
+SELECT A.EmployeeID, FirstName, LastName, JobTitle, Salary FROM EmployeeDemographics AS A
+INNER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+
+SELECT B.EmployeeID, FirstName, LastName, JobTitle, Salary FROM EmployeeDemographics AS A
+RIGHT OUTER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+
+--USECASE #1: WHERE MICHAEL WANTS TO DEDUCT THE SALARY OF THE HIGHEST PAID EMPLOYEE IN THE COMPANY WHICH IS NOT HIM
+SELECT  A.EmployeeID, FirstName, LastName, Salary
+FROM EmployeeDemographics AS A
+INNER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+WHERE FirstName<> 'Michael'
+Order by Salary DESC
+
+--USECASE #2: THE SALARY OF SALESMAN HAS NOT BEEN ASSIGNED PROPERLY SO NEED TO FUND THE AVERAGE SALARY OF THE SALESMAN
+SELECT  JobTitle, Salary
+FROM EmployeeDemographics AS A
+INNER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+WHERE JobTitle= 'Salesman'
+
+SELECT  JobTitle, avg(salary)
+FROM EmployeeDemographics AS A
+INNER JOIN EmployeeSalary AS B
+ON A.EmployeeID = B.EmployeeID 
+WHERE JobTitle= 'Salesman'
+group by JobTitle
