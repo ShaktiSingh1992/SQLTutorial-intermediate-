@@ -131,3 +131,21 @@ ON A.EMPLOYEEid = B.EMPLOYEEID
 GROUP BY JobTitle
 HAVING AVG(SALARY) > 45000
 ORDER BY AVG(SALARY)
+
+/*
+TODAY'S TOPIC: UPDATING/DELETING DATA
+*/
+
+SELECT *
+FROM EmployeeDemographics
+
+UPDATE EmployeeDemographics
+SET EmployeeID = 1012 
+WHERE FirstName = 'Holly' AND LastName = 'Flax'
+
+UPDATE EmployeeDemographics
+SET Age = 31, Gender = 'female' 
+WHERE EmployeeID = 1012
+
+DELETE FROM EmployeeDemographics
+WHERE EmployeeID = 1004
